@@ -14,7 +14,7 @@ dbConf.getConnection((err, connection) => {
   if (err) {
     console.log(`Error mysql connections`, err.sqlMessage);
   }
-  console.log(`Connection mysql succest: ${connection.threadId}`);
+  console.log(`Connection mysql succest: `);
 });
 
 app.get("/", (req, res) => {
