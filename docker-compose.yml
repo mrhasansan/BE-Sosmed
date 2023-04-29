@@ -1,0 +1,21 @@
+# docker-compose.yml
+# https://docs.docker.com/engine/reference/commandline/compose_up
+
+version: '3.8'
+services:
+
+  mysql:
+    image: mysql:8
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=12345678
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=12345678
+      - MYSQL_DATABASE=sosmed
+    volumes:
+      - mysql:/var/lib/mysql
+    ports:
+      - '3306:3306'
+
+volumes:
+  mysql:
