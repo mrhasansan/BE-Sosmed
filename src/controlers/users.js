@@ -15,7 +15,7 @@ module.exports = {
     try {
       let { userName, email, password } = req.body;
       const newPass = hasPassword(password);
-      console.log("newpass", newPass);
+      // console.log("newpass", newPass);
       let results = await dbQuery(`SELECT * FROM Users WHERE email=${dbConf.escape(email)}`);
       if (results.length > 0) {
         return res.status(200).send({
@@ -24,26 +24,26 @@ module.exports = {
         });
       } else {
         let resultInsert = await dbQuery(`INSERT INTO Users (userName,email,password) VALUES (${dbConf.escape(userName)}, ${dbConf.escape(email)}, ${dbConf.escape(newPass)})`);
-        console.log("insert results", resultInsert);
+        // console.log("insert results", resultInsert);
         let token = createToken({ id: resultInsert.insertId, userName, email });
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
       return res.status(500).send(error);
     }
   },
   login: (req, res) => {
     dbConf.query(`SELECT * FROM Users WHERE email=${dbConf.escape(req.body.email)}`, (err, result) => {
       if (err) {
-        console.log(err);
+        console.error(err);
         return res.status(500).send(err);
       }
-      console.log("users", result[0]);
+      // console.log("users", result[0]);
       const checkPassword = bcrypt.compareSync(req.body.password, result[0].password);
-      console.log("cek pass", checkPassword);
+      // console.log("cek password", checkPassword);
       delete result[0].password;
       if (checkPassword) {
-        console.log(result[0]);
+        // console.log(result[0]);
         let token = createToken({ ...result[0] });
         return res.status(200).send({ ...result[0], token });
       } else {

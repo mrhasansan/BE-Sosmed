@@ -8,7 +8,7 @@ module.exports = {
     return hashPass;
   },
   createToken: (payload, expired = "24h") => {
-    console.log("payload", payload);
+    // console.log("payload", payload);
     let token = jwt.sign(payload, "sosmed", {
       expiresIn: expired,
     });
@@ -22,7 +22,7 @@ module.exports = {
           message: "Authenticate token failed",
         });
       }
-      console.log("decript", decript);
+      // console.log("decript", decript);
       req.decript = decript;
       next();
     });

@@ -18,9 +18,9 @@ app.use(express.json());
 
 dbConf.getConnection((err, connection) => {
   if (err) {
-    console.log(`Error mysql connections`, err.sqlMessage);
+    console.error(`Error mysql connections`, err.sqlMessage);
   }
-  console.log(`Connection mysql success: `);
+  console.info(`Connection to mysql is successful`);
 });
 
 app.get("/", (req, res) => {
@@ -29,4 +29,4 @@ app.get("/", (req, res) => {
 
 app.use("/users", usersRouter);
 
-app.listen(PORT, () => console.log("API RUNNING ON PORT ", PORT));
+app.listen(PORT, () => console.info("Sosmed Backend API is running on port:", PORT));
