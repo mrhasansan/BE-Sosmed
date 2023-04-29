@@ -3,8 +3,8 @@ const { hasPassword, createToken } = require("../config/encript");
 const bcrypt = require("bcrypt");
 
 module.exports = {
-  getData: (req, res) => {
-    dbConf.query("SELECT * FROM Users", (err, result) => {
+  getUsers: (req, res) => {
+    dbConf.query("SELECT userName, email FROM Users", (err, result) => {
       if (err) {
         return res.status(500).send(err);
       }
